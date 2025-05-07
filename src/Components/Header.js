@@ -1,11 +1,11 @@
-
 import React, { Component } from 'react'
+
 
 const Header = () => {
   return (
-    <div>
+    <header>
       <text>Header</text>
-    </div>
+    </header>
   )
 }
 

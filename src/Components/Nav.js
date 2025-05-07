@@ -1,20 +1,36 @@
 
 import React, { Component } from 'react'
 
-const Nav =()=> {
-    return (
-      <nav>
-        <img src='Logo.svg'/>
-        <ul>
-            <li><a href='#'>Home</a></li>
-            <li><a href='#'>About</a></li>
-            <li><a href='#'>Menu</a></li>
-            <li><a href='#'>Reservations</a></li>
-            <li><a href='#'>Order Online</a></li>
-            <li><a href='#'>Login</a></li>
-        </ul>
-      </nav>
-    )
-}
+const Nav = () => {
+  return (
+    <nav style={{
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'center',
+      flexWrap: 'wrap',
+      gap: '10px'
+    }}>
+      <img src='Logo.svg' alt='Logo' style={{ maxWidth: '100px', height: 'auto' }} />
+      <ul style={{
+        display: 'flex',
+        flexDirection: 'row',
+        listStyleType: 'none',
+        flexWrap: 'wrap',
+        padding: 0,
+        margin: 0,
+        gap: '10px',
+        marginLeft: 'auto'
+      }}>
+        <li><a href='#' style={{ textDecoration: 'none' }}>Home</a></li>
+        <li><a href='#' style={{ textDecoration: 'none' }}>About</a></li>
+        <li><a href='#' style={{ textDecoration: 'none' }}>Menu</a></li>
+        <li><a href='#' style={{ textDecoration: 'none' }}>Reservations</a></li>
+        <li><a href='#' style={{ textDecoration: 'none' }}>Order Online</a></li>
+        <li><a href='#' style={{ textDecoration: 'none' }}>Login</a></li>
+      </ul>
+    </nav>
+  )
+};
+
 
 export default Nav
