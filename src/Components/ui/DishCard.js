@@ -34,14 +34,14 @@ const DishCard = ({ title, price, description, image }) => {
         display: 'flex',
         flexDirection: 'column'
       }}>
-        <img src={image} alt={title} />
+        <img src={image} alt={title} style={{ height: '200px', width: '100%', objectFit: 'cover' }} />
         <div style={{ padding: '1em' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between' }}>
             <h3>{title}</h3>
-            <span style={{ color: 'orangered', fontWeight: 'bold' }}>{price}</span>
+            <span style={{ color: '#EE9972', fontWeight: 'bold' }}>{price}</span>
           </div>
-          <p>{description}</p>
-          <a href="#" style={{ fontWeight: 'bold' }}>Order a delivery 🚴‍♂️</a>
+          <p style={{color:"#333333"}}>{description}</p>
+          <a href="#" style={{ fontWeight: 'bold', color:"#333333", textDecoration:"none"}}>Order a delivery 🚴‍♂️</a>
         </div>
       </div>
     )

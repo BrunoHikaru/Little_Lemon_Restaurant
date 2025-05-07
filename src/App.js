@@ -1,18 +1,19 @@
 import './App.css';
-import Header from './Components/Header'
-import Nav from './Components/Nav';
-import Main from './Components/Main';
-import Footer from './Components/Footer';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import HomePage from './Pages/HomePage';
+import BookingTable from './Pages/BookingTable';
+
 
 function App() {
   return (
     <>
-      <div className='app-container'>
-        <Nav />
-        <Header />
-        <Main />
-        <Footer />
-      </div>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/booking" element={<BookingTable />} />
+        </Routes>
+      </BrowserRouter>
+
     </>
   );
 }

@@ -1,36 +1,35 @@
-
-import React, { Component } from 'react'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Nav = () => {
   return (
     <nav style={{
       display: 'flex',
-      flexDirection: 'row',
+      justifyContent: 'space-between',
       alignItems: 'center',
-      flexWrap: 'wrap',
-      gap: '10px'
+      padding: '1rem 2rem',
     }}>
-      <img src='Logo.svg' alt='Logo' style={{ maxWidth: '100px', height: 'auto' }} />
+      <Link to="/">
+        <img src="/Logo.svg" alt="Little Lemon Logo" style={{ height: '40px' }} />
+      </Link>
       <ul style={{
         display: 'flex',
-        flexDirection: 'row',
-        listStyleType: 'none',
-        flexWrap: 'wrap',
-        padding: 0,
+        gap: '1.5rem',
+        listStyle: 'none',
         margin: 0,
-        gap: '10px',
-        marginLeft: 'auto'
+        padding: 0
       }}>
-        <li><a href='#' style={{ textDecoration: 'none' }}>Home</a></li>
-        <li><a href='#' style={{ textDecoration: 'none' }}>About</a></li>
-        <li><a href='#' style={{ textDecoration: 'none' }}>Menu</a></li>
-        <li><a href='#' style={{ textDecoration: 'none' }}>Reservations</a></li>
-        <li><a href='#' style={{ textDecoration: 'none' }}>Order Online</a></li>
-        <li><a href='#' style={{ textDecoration: 'none' }}>Login</a></li>
+        <li><Link to="/" style={{ textDecoration: 'none', color: '#333333' }}>Home</Link></li>
+        <li><Link style={{ textDecoration: 'none', color: '#333333' }}>About</Link></li>
+        <li><Link style={{ textDecoration: 'none', color: '#333333' }}>Menu</Link></li>
+        <li><Link to="/booking" style={{ textDecoration: 'none', color: '#333333' }}>Reservations</Link></li>
+        <li><Link style={{ textDecoration: 'none', color: '#333333' }}>Order Online</Link></li>
+        <li><Link style={{ textDecoration: 'none', color: '#333333' }}>Login</Link></li>
+
+
       </ul>
     </nav>
-  )
+  );
 };
 
-
-export default Nav
+export default Nav;

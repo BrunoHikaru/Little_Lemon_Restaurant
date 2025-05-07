@@ -1,50 +1,65 @@
-
-import React, { Component } from 'react'
-import DishCard from './ui/DishCard'
+import React from 'react';
+import DishCard from './ui/DishCard';
 
 const dishes = [
   {
     title: "Greek Salad",
     price: "$12.99",
-    image: "/greek_salad.jpg", 
-    description:
-      "The famous greek salad of crispy lettuce, peppers, olives and our Chicago style feta cheese, garnished with crunchy garlic and rosemary croutons."
+    image: "/greek_salad.jpg",
+    description: "Crispy lettuce, peppers, olives and feta cheese, garnished with crunchy garlic croutons."
   },
   {
     title: "Bruschetta",
     price: "$5.99",
     image: "/bruchetta.svg",
-    description:
-      "Our Bruschetta is made from grilled bread that has been smeared with garlic and seasoned with salt and olive oil."
+    description: "Grilled bread with garlic and olive oil."
   },
   {
     title: "Lemon Dessert",
-    price: "$5.00",
+    price: "$6.00",
     image: "/lemon_dessert.jpg",
-    description:
-      "This comes straight from grandma's recipe book, every last ingredient has been sourced and is as authentic as can be imagined."
+    description: "Straight from grandma's recipe book. Authentic and fresh."
   }
 ];
 
 const Main = () => {
   return (
-    <div style={{
-      display: 'flex',
-      flexWrap: 'wrap',
-      gap: '2rem',
-      justifyContent: 'center',
-      padding: '2rem'
-    }}>
-      {dishes.map((dish, index) => (
-        <DishCard
-          key={index}
-          title={dish.title}
-          price={dish.price}
-          description={dish.description}
-          image={dish.image}
-        />
-      ))}
-    </div>
+    <main style={{ padding: '3rem 2rem' }}>
+      <div style={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        flexWrap: 'wrap'
+      }}>
+        <h2 style={{ fontSize: '2rem' }}>This weeks specials!</h2>
+        <button style={{
+          backgroundColor: '#F4CE14',
+          border: 'none',
+          borderRadius: '8px',
+          padding: '0.5rem 1rem',
+          fontWeight: 'bold',
+          marginTop: '1rem'
+        }}>Online Menu</button>
+      </div>
+      <div style={{
+        display: 'flex',
+        gap: '2rem',
+        flexWrap: 'wrap',
+        marginTop: '2rem',
+        justifyContent: 'center'
+      }}>
+        {dishes.map((dish, i) => (
+          <DishCard
+            key={i}
+            title={dish.title}
+            price={dish.price}
+            description={dish.description}
+            image={dish.image}
+          />
+        ))}
+      </div>
+    </main>
   );
 };
-export default Main
+
+export default Main;
