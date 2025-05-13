@@ -3,7 +3,7 @@ import { Link, Navigate } from 'react-router-dom';
 
 const Header = () => {
   return (
-    <header style={{
+    <section style={{
       backgroundColor: '#495E57',
       color: 'white',
       display: 'flex',
@@ -14,7 +14,7 @@ const Header = () => {
       borderRadius: '0.5rem'
     }}>
 
-      <div style={{ flex: '1', maxWidth: '500px' }}>
+      <article style={{ flex: '1', maxWidth: '500px' }}>
         <h1 style={{ color: '#F4CE14', fontSize: '2.5rem', marginBottom: '0.2em' }}>Little Lemon</h1>
         <h2 style={{ fontWeight: '400', fontSize: '1.8rem', marginTop: 0 }}>Chicago</h2>
         <p style={{
@@ -39,7 +39,7 @@ const Header = () => {
             Reserve a Table
           </button>
         </Link>
-      </div>
+      </article>
 
 
       <div style={{ flex: '1', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
@@ -47,14 +47,18 @@ const Header = () => {
           src="/restauranfood.jpg"
           alt="Delicious dish"
           style={{
-            height: '250px',
-            width: '300px',
-            borderRadius: '16px',
+            maxWidth: '100%',
+            width: '20vw',
+            height: '50vh',
+            borderRadius:' 1em',
             objectFit: 'cover',
+            transform: 'scale(1.2)',
+            position: 'relative',
+            top: '7vh',
           }}
         />
       </div>
-    </header>
+    </section>
   );
 };
 

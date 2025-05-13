@@ -1,5 +1,7 @@
 import React from 'react';
 import DishCard from './ui/DishCard';
+import Owners from './Owners';
+import Testimonial from '../Testimonial';
 
 const dishes = [
   {
@@ -58,6 +60,8 @@ const Main = () => {
           />
         ))}
       </div>
+      <Testimonial/>
+      <Owners/>
     </main>
   );
 };

@@ -1,136 +1,85 @@
-import { useState } from 'react';
+import React from 'react';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { useNavigate } from 'react-router-dom';
+import * as Yup from 'yup';
+import {fetchAPI} from '../Api';
 
-const BookingForm = ({ availableTimes, dispatch }) => {
-  const [date, setDate] = useState('');
-  const [time, setTime] = useState('');
-  const [guests, setGuests] = useState(1);
-  const [occasion, setOccasion] = useState('Birthday');
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [phone, setPhone] = useState('');
-  const [email, setEmail] = useState('');
-  const [notes, setNotes] = useState('');
-
-  const handleDateChange = (e) => {
-    const newDate = e.target.value;
-    setDate(newDate);
-    dispatch({ type: 'update_times', date: newDate });
+const BookingForm = ({ availableTimes, dispatch, submitForm }) => {
+  const initialValues = {
+    name: '',
+    email: '',
+    selectedTime: '',
+    date: '',
+    guests: 1,
+    occasion: 'Birthday'
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const formData = { date, time, guests, occasion, firstName, lastName, phone, email, notes };
-    console.log('Submitted:', formData);
-    // Add API logic here
+  const validationSchema = Yup.object().shape({
+    name: Yup.string().required('Name is required'),
+    email: Yup.string().email('Invalid email').required('Email is required'),
+    selectedTime: Yup.string().required('Time is required'),
+    date: Yup.string().required('Date is required')
+  });
+
+  const navigate = useNavigate();
+
+  const handleSubmit = (values, { resetForm }) => {
+    console.log('Form submitted:', values);
+    navigate('/confirmation');
+    submitForm(values); // Submit the form data to the API
+    dispatch({ type: 'UPDATE_TIMES', payload: fetchAPI(values.date) });
+    resetForm();
   };
 
   return (
-    <form
+    <div className="reserve">
+    <Formik
+      initialValues={initialValues}
+      validationSchema={validationSchema}
       onSubmit={handleSubmit}
-      style={{ display: 'grid', maxWidth: '300px', gap: '20px' }}
-      aria-labelledby="bookingFormTitle"
     >
-      <h2 id="bookingFormTitle">Book a Table</h2>
+      {({ isSubmitting, isValid, values }) => (
+        <Form className="booking-form" aria-label="booking a table form">
+          <label htmlFor="name">Your Name</label>
+          <Field type="text" id="name" name="name" placeholder="Enter your name" aria-label="Your Name"/>
+          <ErrorMessage name="name" className="error" component="div" />
 
-      <label htmlFor="res-date">Choose date</label>
-      <input
-        type="date"
-        id="res-date"
-        value={date}
-        onChange={handleDateChange}
-        required
-        aria-required="true"
-      />
+          <label htmlFor="email">Your Email</label>
+          <Field type="email" id="email" name="email" placeholder="Email" aria-label="Your Email"/>
+          <ErrorMessage name="email" className="error" component="div" />
 
-      <label htmlFor="res-time">Choose time</label>
-      <select
-        id="res-time"
-        value={time}
-        onChange={(e) => setTime(e.target.value)}
-        required
-        aria-required="true"
-      >
-        <option value="" disabled>Select time</option>
-        {availableTimes.map((t) => (
-          <option key={t} value={t}>{t}</option>
-        ))}
-      </select>
+          <label htmlFor="date">Choose Date</label>
+          <Field type="date" id="date" name="date"  aria-label="Choose Date"/>
+          <ErrorMessage name="date" className="error" component="div" />
 
-      <label htmlFor="guests">Number of guests</label>
-      <input
-        type="number"
-        id="guests"
-        min="1"
-        max="10"
-        value={guests}
-        onChange={(e) => setGuests(e.target.value)}
-        required
-        aria-required="true"
-      />
+          <label htmlFor="selectedTime">Choose Time</label>
+          <Field as="select" id="selectedTime" name="selectedTime" aria-label="Choose Time">
+            <option value="">Select Time</option>
+            {Array.isArray(availableTimes) && availableTimes.map(time => (
+              <option key={time} value={time}>{time}</option>
+            ))}
+          </Field>
+          <ErrorMessage name="selectedTime" className="error" component="div" />
 
-      <label htmlFor="occasion">Occasion</label>
-      <select
-        id="occasion"
-        value={occasion}
-        onChange={(e) => setOccasion(e.target.value)}
-      >
-        <option>Birthday</option>
-        <option>Anniversary</option>
-        <option>Company Luch/Dinner</option>
-        <option>Celebration</option>
-        <option>Other</option>
-      </select>
+          <label htmlFor="guests">Number of guests</label>
+          <Field type="number" id="guests" name="guests" min="1" max="10" aria-label="Number of guests"/>
 
-      <label htmlFor="first-name">First Name</label>
-      <input
-        type="text"
-        id="first-name"
-        value={firstName}
-        onChange={(e) => setFirstName(e.target.value)}
-        required
-        aria-required="true"
-      />
+          <label htmlFor="occasion">Occasion</label>
+          <Field as="select" id="occasion" name="occasion" aria-label="Occasion">
+            <option value="Birthday">Birthday</option>
+            <option value="Anniversary">Anniversary</option>
+            <option value="Company">Company Dinner/Lunch</option>
+            <option value="Couples">Couples</option>
+            <option value="Other">Other</option>
+          </Field>
 
-      <label htmlFor="last-name">Last Name</label>
-      <input
-        type="text"
-        id="last-name"
-        value={lastName}
-        onChange={(e) => setLastName(e.target.value)}
-        required
-        aria-required="true"
-      />
-
-      <label htmlFor="phone">Phone Number</label>
-      <input
-        type="tel"
-        id="phone"
-        value={phone}
-        onChange={(e) => setPhone(e.target.value)}
-        required
-        aria-required="true"
-      />
-
-      <label htmlFor="email">Email (optional)</label>
-      <input
-        type="email"
-        id="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        aria-describedby="emailHelp"
-      />
-      <small id="emailHelp">We’ll only use it to send confirmation.</small>
-
-      <label htmlFor="notes">Additional Notes</label>
-      <textarea
-        id="notes"
-        value={notes}
-        onChange={(e) => setNotes(e.target.value)}
-        rows="3"
-      />
-
-      <button type="submit" aria-label="Make your reservation">Make Your Reservation</button>
-    </form>
+          <button className="button-form" type="submit" disabled={isSubmitting || !isValid || !values.name.trim() || !values.email.trim() || !values.selectedTime || !values.date}>
+            Make Your Reservation
+          </button>
+        </Form>
+      )}
+    </Formik>
+    </div>
   );
 };
 

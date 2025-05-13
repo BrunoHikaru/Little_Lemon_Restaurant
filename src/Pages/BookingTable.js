@@ -1,30 +1,45 @@
 import BookingForm from '../Components/ui/BookingForm';
-import { useReducer } from 'react';
+import { useReducer, useEffect } from 'react';
+import { fetchAPI } from '../Components/Api';
+import Header from '../Components/Header'
+import Nav from '../Components/Nav'
+import Footer from '../Components/Footer';
+
 
 export const initializeTimes = () => {
-  return ["17:00", "18:00", "19:00", "20:00", "21:00", "22:00"];
+  
+  return fetchAPI(new Date());
 };
+
 
 export const updateTimes = (state, action) => {
+  
   const selectedDate = new Date(action.date);
-  const day = selectedDate.getDay(); 
-
-  if (day === 0 || day === 6) {
-    return ["18:00", "19:00", "20:00", "21:00"];
-  }
-
-  return ["17:00", "18:00", "19:00", "20:00", "21:00", "22:00"];
+  return fetchAPI(selectedDate);
 };
 
-
 const BookingTable = () => {
-  const [availableTimes, dispatch] = useReducer(updateTimes, [], initializeTimes);
+  
+  const [availableTimes, dispatch] = useReducer(
+    updateTimes,
+    [],
+    initializeTimes
+  );
+
+  
+  useEffect(() => {
+    dispatch({ date: new Date() });
+  }, []);
 
   return (
-    <section style={{ padding: '2rem' }}>
-      <h1>Reserve a Table</h1>
+    <section className='app-container'>
+	<Nav />
+      <Header />
+      <h2>Reserve a Table</h2>
       <p>Please fill in the details below to book a table at Little Lemon.</p>
-      <BookingForm availableTimes={availableTimes} dispatch={dispatch}/>
+      
+      <BookingForm availableTimes={availableTimes} dispatch={dispatch} />
+	<Footer/>
     </section>
   );
 };
