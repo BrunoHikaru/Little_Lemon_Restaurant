@@ -130,67 +130,82 @@ img {
 
 }
 
-.confirmation-grid {
-  display: grid;
-  grid-template-areas:
-    "title"
-    "image"
-    "buttons";
-  grid-gap: 1rem;
-  padding: 1rem;
-  text-align: center;
+/* Main layout */
+.confirmation-container {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+    background-color: #EDEFEE;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border-radius: 16px;
+    margin-top: 3rem;
+    gap: 2rem;
+    margin-bottom: 3rem;
 }
 
-.confirmation-grid h2 {
-  grid-area: title;
-  margin: 0 auto;
+/* Text section */
+.confirmation-text {
+    flex: 1;
 }
 
-.confirmation-grid img {
-  grid-area: image;
-  max-width: 100%;
-  height: auto;
-  margin: 0 auto;
+.confirmation-text h2 {
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: 1.5rem;
 }
 
+/* Button styles */
 .button-group {
-  grid-area: buttons;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }
 
 .confirm-button {
-  background-color: #F4CE14;
-  border: none;
-  border-radius: 8px;
-  padding: 0.75rem 1.5rem;
-  font-weight: bold;
-  font-size: 1rem;
-  cursor: pointer;
+    padding: 0.75rem 1.5rem;
+    background-color: #ffc107;
+    color: #000;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
+.confirm-button:hover {
+    background-color: #e0a800;
+}
 
+/* Image section */
+.confirmation-image img {
+    max-width: 100%;
+    border-radius: 12px;
+    height: auto;
+    object-fit: cover;
+}
+
+/* Responsive layout */
 @media (min-width: 768px) {
-  .confirmation-grid {
-    grid-template-areas:
-      "title title"
-      "image buttons";
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    text-align: left;
-  }
+    .confirmation-container {
+        flex-direction: row;
+        align-items: center;
+    }
 
-  .button-group {
-    flex-direction: column;
-    align-items: flex-start;
-  }
+    .button-group {
+        flex-direction: row;
+        justify-content: flex-start;
+    }
 
-  .confirmation-grid h2 {
-    text-align: center;
-    grid-column: span 2;
-  }
+    .confirm-button {
+        width: auto;
+    }
+
+    .confirmation-text,
+    .confirmation-image {
+        flex: 1;
+    }
 }
 
 /*Testimonial*/

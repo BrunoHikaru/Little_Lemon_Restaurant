@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Instagram, Facebook } from 'lucide-react'
-
+import { Link } from 'react-router-dom';
 
 
 const Footer = () => {
@@ -12,10 +12,10 @@ const Footer = () => {
       <nav className="footer__nav" aria-label="Footer Navigation">
         <h4>Navigation</h4>
         <ul>
-          <li><a href="#">Home</a></li>
+          <li><Link to='/'>Home</Link></li>
           <li><a href="#">About</a></li>
           <li><a href="#">Menu</a></li>
-          <li><a href="#">Reservations</a></li>
+          <li><Link to='/booking'>Reservations</Link></li>
           <li><a href="#">Order Online</a></li>
           <li><a href="#">Login</a></li>
         </ul>
